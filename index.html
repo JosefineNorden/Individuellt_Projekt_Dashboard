@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Josefines Dashboard</title>
+  <link rel="stylesheet" href="style.css?v=8" />
+</head>
+<body>
+
+  <!-- Tid & datum -->
+  <header id="top-bar" role="banner" aria-label="Tid och datum">
+    <div id="clock" aria-live="polite">10:10</div>
+    <div id="date">1 april 2024</div>
+  </header>
+
+  <!-- Rubrik -->
+  <h1 id="dashboard-title">Josefines Dashboard</h1>
+  <p class="title-hint">Klicka på rubriken för att ändra</p>
+
+  <!-- 4 kort -->
+  <main id="main" role="main">
+    <!-- Snabblänkar -->
+    <section id="quick-links" aria-labelledby="quick-links-title">
+      <h2 id="quick-links-title">Snabblänkar</h2>
+
+      <form id="link-form" aria-describedby="link-help" hidden>
+        <label for="link-title">Namn</label>
+        <input id="link-title" name="title" type="text" placeholder="t.ex. Google" required />
+
+        <label for="link-url">URL</label>
+        <!-- type="text" så att google.com tillåts normaliserar i JS -->
+        <input id="link-url" name="url" type="text" placeholder="t.ex. google.com" required />
+
+        <p id="link-help" class="form-hint">Skriv in din länk!</p>
+        <div class="form-actions">
+          <button type="submit">Spara länk</button>
+          <button type="button" id="cancel-link" class="secondary">Avbryt</button>
+        </div>
+      </form>
+
+      <!-- Lista med sparade länkar -->
+      <ul id="links-list"></ul>
+
+      <!-- Knapp i botten av kortet -->
+      <button id="add-link" aria-controls="link-form">+ Lägg till länk</button>
+    </section>
+
+    <!-- Väder (geolocation + Open-Meteo) -->
+    <section id="weather" aria-labelledby="weather-title">
+      <h2 id="weather-title">Dagens väder</h2>
+      <ul id="weather-list">
+        <li class="weather-row">
+          <span class="w-icon" aria-hidden="true"></span>
+          <div class="w-text"><strong>Idag</strong></div>
+          <div class="w-tags"><span class="chip">—</span><span class="chip">—</span></div>
+        </li>
+        <li class="weather-row">
+          <span class="w-icon" aria-hidden="true"></span>
+          <div class="w-text"><strong>Imorgon</strong></div>
+          <div class="w-tags"><span class="chip">—</span><span class="chip">—</span></div>
+        </li>
+        <li class="weather-row">
+          <span class="w-icon" aria-hidden="true"></span>
+          <div class="w-text"><strong>Fredag</strong></div>
+          <div class="w-tags"><span class="chip">—</span><span class="chip">—</span></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Extra sektion -->
+    <section id="custom-api" aria-labelledby="custom-title">
+      <h2 id="custom-title">Extra sektion</h2>
+    </section>
+
+    <!-- Anteckningar -->
+    <section id="notes" aria-labelledby="notes-title">
+      <h2 id="notes-title">Anteckningar</h2>
+      <label class="sr-only" for="notes-text">Skriv dina anteckningar</label>
+      <textarea id="notes-text"></textarea>
+    </section>
+  </main>
+
+  <!-- Bakgrundsknapp -->
+  <button id="change-background">Byt bakgrund</button>
+
+  <script src="script.js?v=8"></script>
+</body>
+</html>

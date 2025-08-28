@@ -1,0 +1,432 @@
+/* ===== Bas ===== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  color: #111;
+}
+
+/* ===== Puck: tid/datum ===== */
+#top-bar {
+  display: flex;
+  width: fit-content;
+  margin: 16px auto;
+  gap: 10px;
+  padding: 6px 14px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+  font-size: 0.9rem;
+}
+
+/* ===== Rubrik ===== */
+#dashboard-title {
+  text-align: center;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  margin: 18px 0 8px;
+}
+
+.title-hint {
+  text-align: center;
+  color: #666;
+  margin: 0 0 22px;
+}
+
+.title-edit-input {
+  display: block;
+  margin: 0 auto 8px;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 700;
+  text-align: center;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: min(720px, 92%);
+}
+
+/* ===== 4 kort ===== */
+main {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 22px;
+  max-width: 1100px;
+  margin: 0 auto 28px;
+  padding: 0 20px;
+}
+
+@media (max-width: 1030px) {
+  main {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Korten ===== */
+section {
+  background: #e9e9e9;
+  border: 1px solid #dadada;
+  border-radius: 16px;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, .06);
+  padding: 16px;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+section h2 {
+  margin: 2px 0 14px;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: .2px;
+}
+
+/* ===== Snabblänkar ===== */
+#quick-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#quick-links li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-height: 56px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .03);
+}
+
+#quick-links li .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+#quick-links a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 280px;
+}
+
+.favicon {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.remove-link {
+  background: none;
+  border: 1px solid #ddd;
+  color: #666;
+  border-radius: 999px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+/* Lägg-knapp i botten */
+#add-link {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #dcdcdc;
+  border: 1px solid #cfcfcf;
+  color: #333;
+}
+
+
+#link-form {
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+#link-form label {
+  font-size: .9rem;
+  color: #444;
+}
+
+#link-form input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font: inherit;
+  background: #fff;
+}
+
+#link-form .form-hint {
+  margin: 4px 0 2px;
+  color: #666;
+  font-size: .9rem;
+}
+
+#link-form .form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+#link-form button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+}
+
+#link-form button.secondary {
+  background: #eee;
+}
+
+/* ===== Väder ===== */
+#weather-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.weather-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-height: 52px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .03);
+}
+
+.w-text {
+  flex: 1;
+}
+
+.w-text strong {
+  font-weight: 700;
+}
+
+.w-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #f3f3f3;
+  border: 1px solid #ddd;
+  font-size: .85rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+
+.w-icon {
+  width: 28px;
+  height: 28px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #ddd;
+  position: relative;
+  font-size: 0;
+  line-height: 0;
+}
+
+.w-icon::before {
+  content: "\2601";
+  /* ☁ default */
+  font-size: 16px;
+  line-height: 1;
+  color: #444;
+  font-family: "Segoe UI Symbol", "Noto Sans Symbols", system-ui, sans-serif;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.w-icon.sun::before {
+  content: "\2600";
+}
+
+/* ☀ klart */
+.w-icon.cloud::before {
+  content: "\2601";
+}
+
+/* ☁ mulet/moln */
+.w-icon.rain::before {
+  content: "\2614";
+}
+
+/* ☔ regn */
+.w-icon.snow::before {
+  content: "\2744";
+}
+
+/* ❄ snö */
+.w-icon.thunder::before {
+  content: "\26A1";
+}
+
+/* ⚡ åska */
+.w-icon.fog::before {
+  content: "\224B";
+}
+
+/* ≋ dimma-ish */
+
+/* ===== Anteckningar ===== */
+#notes textarea {
+  flex: 1;
+  min-height: 240px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+  margin-top: 8px;
+}
+
+/* ===== Bakgrund ===== */
+html.has-bg,
+body.has-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+#change-background {
+  display: block;
+  margin: 8px auto 24px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #bbb;
+  background: #fff;
+}
+
+
+button:focus,
+a:focus,
+input:focus,
+textarea:focus {
+  outline: 3px solid #222;
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Extra sektion – nyheter */
+#custom-api #news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#custom-api #news-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.03);
+}
+
+#custom-api #news-list a {
+  color: #111;
+  text-decoration: none;
+  flex: 1;
+}
+
+#custom-api .news-time {
+  font-size: .85rem;
+  color: #666;
+  background: #f3f3f3;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  padding: 2px 8px;
+  flex-shrink: 0;
+}
+
+#custom-api .news-refresh {
+  margin-top: auto;        
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #bbb;
+  background: #fff;
+}
+
+#custom-api .news-status {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #666;
+}
