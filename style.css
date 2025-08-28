@@ -6,6 +6,7 @@
 html,
 body {
   height: 100%;
+  overflow-x: hidden;                 
 }
 
 [hidden] {
@@ -18,6 +19,16 @@ body {
   padding: 0;
   background-color: #f0f0f0;
   color: #111;
+
+  min-height: 100vh;                  
+  display: flex;                     
+  flex-direction: column;            
+  overflow-y: hidden;                
+}
+
+
+#top-bar, #dashboard-title, .title-hint, #change-background {
+  flex: 0 0 auto;                    
 }
 
 /* ===== Puck: tid/datum ===== */
@@ -61,44 +72,41 @@ body {
 }
 
 /* ===== 4 kort ===== */
-main {
+main{
   display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
-  gap: 22px;
-  max-width: 1100px;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); 
+  gap: clamp(12px, 2.2vw, 22px);
+
+  width: min(1100px, 100%);
   margin: 0 auto 28px;
-  padding: 0 20px;
-}
+  padding: 0 clamp(8px, 2vw, 20px);
 
-@media (max-width: 1030px) {
-  main {
-    grid-template-columns: repeat(2, minmax(220px, 1fr));
-  }
-}
-
-@media (max-width: 560px) {
-  main {
-    grid-template-columns: 1fr;
-  }
+  flex: 1 1 auto;                   
+  min-height: 0;                      
 }
 
 /* ===== Korten ===== */
-section {
-  background: #e9e9e9;
-  border: 1px solid #dadada;
+section{
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(255,255,255,.55);
   border-radius: 16px;
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, .06);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
   padding: 16px;
-  min-height: 340px;
+
   display: flex;
   flex-direction: column;
+  min-height: 0;   
+  min-width: 0;    
+  height: 100%;    
+  overflow: hidden;
 }
 
-section h2 {
-  margin: 2px 0 14px;
-  font-weight: 600;
-  color: #333;
-  letter-spacing: .2px;
+/* Glas-effekt där det stöds */
+@supports (backdrop-filter: blur(6px)) {
+  section{
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
 }
 
 /* ===== Snabblänkar ===== */
@@ -109,6 +117,10 @@ section h2 {
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  flex: 1 1 auto;        
+  min-height: 0;        
+  overflow: auto;       
 }
 
 #quick-links li {
@@ -122,6 +134,7 @@ section h2 {
   padding: 10px 12px;
   min-height: 56px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, .03);
+  min-width: 0;          
 }
 
 #quick-links li .left {
@@ -129,6 +142,7 @@ section h2 {
   align-items: center;
   gap: 10px;
   min-width: 0;
+  flex: 1 1 auto;        /* NYTT */
 }
 
 #quick-links a {
@@ -171,6 +185,7 @@ section h2 {
 }
 
 
+/* Formulär */
 #link-form {
   background: #f2f2f2;
   border: 1px solid #ddd;
@@ -225,52 +240,80 @@ section h2 {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
 
-.weather-row {
-  display: flex;
+  flex: 1 1 auto;       
+  min-height: 0;         
+  overflow: auto;        
+}
+.weather-row{
+  display: grid !important;
+  grid-template-columns: 46px 1fr;   
+  grid-auto-rows: auto;
   align-items: center;
-  gap: 12px;
+  gap: 8px 12px;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 10px 12px;
-  min-height: 52px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, .03);
+  padding: 12px 14px;
+  min-height: 60px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.03);
 }
 
-.w-text {
-  flex: 1;
-}
-
-.w-text strong {
-  font-weight: 700;
-}
-
-.w-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.chip {
+.w-icon{
+  grid-column: 1;
+  grid-row: 1 / span 2;           
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  border: 1.5px solid #d7d7d7;
+  background: #fff;
   display: inline-flex;
   align-items: center;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: #f3f3f3;
-  border: 1px solid #ddd;
-  font-size: .85rem;
-  line-height: 1.2;
-  white-space: nowrap;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
 }
+.w-icon::before{
+  font-size: 24px;
+  line-height: 1;
+  color: #222;
+}
+
+.w-text{
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+.w-text strong{
+  display: block;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.w-tags{
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;            
+}
+.chip{
+  white-space: nowrap;        
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #efefef;
+  border: 1px solid #d7d7d7;
+  font-size: .9rem;
+  line-height: 1.1;
+}
+
 
 
 .w-icon {
   width: 28px;
   height: 28px;
   box-sizing: border-box;
-  flex-shrink: 0;
+  flex: 0 0 28px;        
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -296,41 +339,19 @@ section h2 {
   justify-content: center;
 }
 
-.w-icon.sun::before {
-  content: "\2600";
-}
-
-/* ☀ klart */
-.w-icon.cloud::before {
-  content: "\2601";
-}
-
-/* ☁ mulet/moln */
-.w-icon.rain::before {
-  content: "\2614";
-}
-
-/* ☔ regn */
-.w-icon.snow::before {
-  content: "\2744";
-}
-
-/* ❄ snö */
-.w-icon.thunder::before {
-  content: "\26A1";
-}
-
-/* ⚡ åska */
-.w-icon.fog::before {
-  content: "\224B";
-}
-
-/* ≋ dimma-ish */
+.w-icon.sun::before { content: "\2600"; }   /* ☀ klart */
+.w-icon.cloud::before { content: "\2601"; } /* ☁ mulet/moln */
+.w-icon.rain::before { content: "\2614"; }  /* ☔ regn */
+.w-icon.snow::before { content: "\2744"; }  /* ❄ snö */
+.w-icon.thunder::before { content: "\26A1"; } /* ⚡ åska */
+.w-icon.fog::before { content: "\224B"; }   /* ≋ dimma-ish */
 
 /* ===== Anteckningar ===== */
 #notes textarea {
-  flex: 1;
-  min-height: 240px;
+  flex: 1 1 auto;        
+  min-height: 0;         
+  overflow: auto;        
+
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -356,7 +377,6 @@ body.has-bg {
   border: 1px solid #bbb;
   background: #fff;
 }
-
 
 button:focus,
 a:focus,
@@ -386,6 +406,10 @@ textarea:focus {
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  flex: 1 1 auto;        /* NYTT: fyll kortet */
+  min-height: 0;         /* NYTT */
+  overflow: auto;        /* NYTT */
 }
 
 #custom-api #news-list li {
@@ -397,12 +421,15 @@ textarea:focus {
   border-radius: 12px;
   padding: 10px 12px;
   box-shadow: 0 1px 0 rgba(0,0,0,.03);
+  min-width: 0;          /* NYTT */
 }
 
 #custom-api #news-list a {
   color: #111;
   text-decoration: none;
-  flex: 1;
+  flex: 1 1 auto;        /* NYTT */
+  min-width: 0;          /* NYTT */
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; /* NYTT */
 }
 
 #custom-api .news-time {

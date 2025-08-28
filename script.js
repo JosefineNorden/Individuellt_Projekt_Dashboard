@@ -358,7 +358,7 @@ if (notesEl) {
   btn.addEventListener('click', changeBackground);
 })();
 
-/*************** EXTRA SEKCION – Aftonbladet ***************/
+/*************** EXTRA SEKTION – Aftonbladet ***************/
 (function setupAftonbladetNews() {
   const section = document.getElementById('custom-api');
   if (!section) return;
@@ -390,6 +390,7 @@ if (notesEl) {
   async function loadNews() {
     list.innerHTML = '<li class="news-status">Hämtar…</li>';
     try {
+      console.log('Hämtar nyheter från Aftonbladet…');
       const res = await fetch(FEED_URL);
       if (!res.ok) throw new Error('Nätverksfel');
       const xml = await res.text();
